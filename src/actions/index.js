@@ -13,10 +13,16 @@ export const FETCH_CHAR_FAILURE = 'FETCH_CHAR_FAILURE';
 
 export const getChar = () => async dispatch => {
     dispatch({ type: FETCH_CHAR_START });
-    try {
-        const res = await axios.get('https://swapi.co/api/people/')
-        dispatch({ type: FETCH_CHAR_SUCCESS, payload: res.data })
+    try{
+        const res = await axios.get('https://swapi.co/api/people')
+        dispatch({
+            type: FETCH_CHAR_SUCCESS,
+            payload: res.data.results,
+        });
     } catch (err) {
-        dispatch({ type: FETCH_CHAR_FAILURE, payload: err.message })
+        dispatch({
+            type: FETCH_CHAR_FAILURE,
+            payload: err.message,
+        });
     }
 }
