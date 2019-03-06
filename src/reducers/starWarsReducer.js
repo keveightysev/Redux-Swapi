@@ -1,4 +1,4 @@
-import { FETCH_CHAR_START } from "../actions";
+import { FETCH_CHAR_START, FETCH_CHAR_SUCCESS, FETCH_CHAR_FAILURE } from "../actions";
 
 const initialState = {
   characters: [],
@@ -16,6 +16,19 @@ export const charsReducer = (state = initialState, action) => {
         error: '',
         isLoading: true
       };
+    case FETCH_CHAR_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        isLoading: false,
+        characters: action.payload,
+      };
+    case FETCH_CHAR_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
     default:
       return state;
   }
